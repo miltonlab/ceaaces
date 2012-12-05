@@ -1,0 +1,23 @@
+
+ * Example OpenERP 6.0 Server as another instancie:
+
+   python ./bin/openerp-server.py -r openerp60 -w openerp60 \
+   --db_host 127.0.0.1 --xmlrpc-port=8073 --netrpc-port=8074 \
+   --xmlrpcs-port=8075
+
+* Example OpenERP Web client config file:
+
+   Archivo openerp-web.cfg
+   # ..
+   # Some server parameters that you may want to tweak
+   server.socket_host = "0.0.0.0"
+   server.socket_port = 8083
+   #....
+   # OpenERP Server
+   openerp.server.host = 'localhost'
+   openerp.server.port = '8074' #  NETRPC port of openrp server
+   openerp.server.protocol = 'socket'
+
+ * Example webclient run (desde el directorio del cliente web):
+
+   python openerp-web.py -c doc/openerp-web.cfg

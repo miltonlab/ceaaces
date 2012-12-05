@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <openerp>
 <data>
 
@@ -35,8 +35,10 @@
 	    <field name="nombres"/>
 	    <field name="apellidos"/>
 	    <field name="carrera"/>
+	    <field name="duracion_carrera"/>
+	    <field name="area"/>
+	    <field name="ingreso"/>
 	    <field name="egresado"/>
-	    <field name="semestre_egreso"/>
 	    <field name="graduado"/>
 	    <field name="titulo"/>
 	  </tree>
@@ -60,9 +62,11 @@
 	  <field name="egresado"/>
 	  <field name="dni"/>
 	  <newline />
+	  <!--button name="calcular_confirm" states="draft" string="Confirm Order" icon="gtk-execute"/-->
+	  <newline />
 	  <group expand="0" string="Seleccionar...">
 	    <filter string="Carrera" icon="terp-personal+" domain="[]" context="{'group_by':'carrera'}"/>    
-	    <!--filter string="Carrera" icon="terp-personal+" domain="[]" context="{'group_by':'inicio'}"/-->
+	    <filter string="Inicio Cohorte" icon="terp-personal+" domain="[]" context="{'group_by': 'ingreso'}"/>
 	  </group>
 
 
