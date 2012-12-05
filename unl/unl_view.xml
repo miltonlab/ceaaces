@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+  <!-- Formulario Estudiante -->
+
+    <record model="ir.ui.view" id="view_unl_estudiante_form">
+        <field name="name">unl.estudiante.form</field>
+        <field name="model">unl.estudiante</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="unl.estudiante">
+                <field name="dni" select="1"/>
+                <field name="nombres"/>
+                <field name="apellidos"/>
+                <field name="egresado"/>
+                <field name="semestre_egreso"/>
+                <field name="graduado"/>
+                <field name="titulo"/>
+		<field name="carrera"/>
+		<field name="area"/>
+            </form>
+        </field>
+    </record>
+
+    <!--Lista Estudiantes -->
+    
+    <record model="ir.ui.view" id="view_unl_estudiante_tree">
+      <field name="name">unl.estudiante.tree</field>
+        <field name="model">unl.estudiante</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+	  <tree string="unl.estudiante">
+	    <field name="dni" select="1"/>
+	    <field name="nombres"/>
+	    <field name="apellidos"/>
+	    <field name="carrera"/>
+	    <field name="egresado"/>
+	    <field name="semestre_egreso"/>
+	    <field name="graduado"/>
+	    <field name="titulo"/>
+	  </tree>
+        </field>
+    </record>
+
+    <!-- Vista Busqueda Estudiantes -->
+
+    <record id="view_estudiante_filter" model="ir.ui.view">
+      <field name="name">Estudiantes</field>
+      <field name="model">unl.estudiante</field>
+      <field name="type">search</field>
+      <field name="arch" type="xml">
+	<search string="Estudiantes">
+	  <!--filter icon="terp-personal+" domain="[('active','=',True)]" name="active" string="Active" groups="base.group_extended"/>
+	  <separator orientation="vertical" /-->
+	  <field name="apellidos"/>
+	  <field name="nombres"/>
+	  <!--field name="carrera"/-->
+	    <!--filter icon="terp-personal+" domain="[('department_id','=',context.get('department_id',False))]" string="My Departments Employee"/-->
+	  <field name="egresado"/>
+	  <field name="dni"/>
+	  <newline />
+	  <group expand="0" string="Seleccionar...">
+	    <filter string="Carrera" icon="terp-personal+" domain="[]" context="{'group_by':'carrera'}"/>    
+	    <!--filter string="Carrera" icon="terp-personal+" domain="[]" context="{'group_by':'inicio'}"/-->
+	  </group>
+
+
+	  <!--group expand="0" string="Group By...">
+	    <filter string="Manager" icon="terp-personal" domain="[]" context="{'group_by':'parent_id'}"/>
+	    <filter string="Coach" icon="terp-personal" domain="[]" context="{'group_by':'coach_id'}" groups="base.group_extended"/>
+	    <separator orientation="vertical" />
+	    <filter string="Department" icon="terp-personal+" domain="[]" context="{'group_by':'department_id'}"/>
+	    <filter string="Job" icon="terp-gtk-select-all" domain="[]" context="{'group_by':'job_id'}"/>
+	    <filter string="Company" icon="terp-go-home" domain="[]" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+	  </group-->
+	</search>
+      </field>
+    </record>
+
+    <!-- Menus y acciones -->
+
+    <record model="ir.actions.act_window" id="action_unl_estudiante">
+        <field name="name">Estudiantes</field>
+        <field name="res_model">unl.estudiante</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="UNL" id="menu_unl"/>
+
+    <menuitem name="Estudiantes" id="menu_unl_estudiante" action="action_unl_estudiante" parent="menu_unl"/>
+
+
+    <!-- Modelo Docente -->
+        
+    <record model="ir.ui.view" id="view_unl_docente_form">
+      <field name="name">unl.docente.form</field>
+      <field name="model">unl.docente</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+	<form string="unl.docente">
+	  <field name="dni"/>
+	  <field name="nombres"/>
+	  <field name="apellidos"/>
+	  <field name="carrera"/>
+	  <field name="area"/>
+	</form>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="view_unl_docente_tree">
+      <field name="name">unl.docente.tree</field>
+      <field name="model">unl.docente</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+	<tree string="unl.docente">
+	  <field name="dni"/>
+	  <field name="nombres"/>
+	  <field name="apellidos"/>
+	</tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_unl_docente">
+      <field name="name">Docentes</field>
+      <field name="res_model">unl.docente</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem name="Docentes" id="menu_unl_docente" action="action_unl_docente" parent="menu_unl"/>
+        
+  </data>
+</openerp>
