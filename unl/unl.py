@@ -1,5 +1,4 @@
-# -*- encoding: utf-8 -*-
-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -49,6 +48,22 @@ areas = (('AEIRNNR', 'AEIRNNR'),
 class unl_estudiante(osv.osv):
     """Estudiantes"""
     _name = 'unl.estudiante'
+ 
+    def _anio_ingreso(self, cr, uid, ids, fields, arg, context=None):
+        # self si es metodo sino vacio, cursos, userids, ids, campos, valores
+        result = {}
+        for r in self.browse(cr, uid, ids, context=context):
+            # Ojo, un datetime, se renderiza como str en este momento
+            result[r.id] = r.ingreso.split('-')[0]
+        return result
+
+    def _eficiencia_terminal(self, cr, uid, ids, fields, arg, context=None):
+        result = {}
+        records = self.browse(cr, uid, ids, context=context)
+        for r in records: 
+            result[r.id] = len(records)
+        return result
+
     _columns = {
         'dni': fields.char('Cedula', size=15, help='Cedula o Pasaprte de Identidad'),        
         'nombres': fields.char('Nombres',size=35, help='Nombres del Estudiante'),
@@ -60,8 +75,11 @@ class unl_estudiante(osv.osv):
         'graduado': fields.date('Gradudado', help="Fecha de graduacion"),
         'titulo': fields.char('Titulo', size=35, help='Titulo que obtuvo en la Carrera'),
         'carrera': fields.char('Carrera',size=150, help='Nombre de la Carrera'),
-        'area': fields.selection(areas, 'Area', help='Area Academica Administrativa de la UNL')
-        'anio_ingreso' : fields.function (anio_ingreso, type = 'integer', string = u'Año de Ingreso'),
+        'area': fields.selection(areas, 'Area', help='Area Academica Administrativa de la UNL'),
+        'anio_ingreso' : fields.function (_anio_ingreso, type='integer', 
+                                          method=True, string=u'Año de Ingreso'),
+        'eficiencia_terminal': fields.function(_eficiencia_terminal, type='float', 
+                                               method=True, string='Eficiencia Terminal de Grado')  
 #	'carrera_ids': fields.many2many(
 #            'unl.carrera',
 #            'estudiante_carrera_rel',
@@ -70,14 +88,6 @@ class unl_estudiante(osv.osv):
 #            'Carreras'
 #        )
     }
-
-    def anio_ingreso(self, cr, uid, ids, fields, arg, context=None):
-        records = self.browse(cr, uid, ids)
-        print "testing ...", records
-        r = records[0]
-        result = {}
-        result[r.id] = r.igreso.year
-        return result
 
     _sql_constraints = [
         ('dni_carrera_unique', 'unique(dni, carrera)', u'La Cédula y la Carrera deben ser únicos !'),
@@ -108,5 +118,6 @@ class unl_docente(osv.osv):
 
     _defaults = { 
     }      
+
 unl_docente()
 

@@ -41,6 +41,7 @@
 	    <field name="egresado"/>
 	    <field name="graduado"/>
 	    <field name="titulo"/>
+	    <field name="eficiencia_terminal"/>
 	  </tree>
         </field>
     </record>

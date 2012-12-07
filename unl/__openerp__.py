@@ -10,6 +10,7 @@
         "demo_xml" : [ ],
         "update_xml" : [
 	        'unl_view.xml',
+                #'unl.estudiante.csv'
                 #'security/unl_security.xml',
                 #'secutiry/ir.model.access.csv'
 	        ],
